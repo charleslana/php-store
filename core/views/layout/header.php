@@ -12,8 +12,9 @@ use core\classes\Store;
             <a href="?action=index" class="custom-nav-item">Ínicio</a>
             <a href="?action=store" class="custom-nav-item">Loja</a>
             <?php if (Store::validateLoggedUser()): ?>
-                <a href="?action=dashboard" class="custom-nav-item">Minha conta</a>
-                <a href="?action=logout" class="custom-nav-item">Sair</a>
+                <!--                <a href="?action=dashboard" class="custom-nav-item"></a>-->
+                <em class="fa-solid fa-user me-2"></em><?= $_SESSION['email'] ?>
+                <a href="?action=logout" class="custom-nav-item"><i class="fa-solid fa-sign-out-alt"></i></a>
             <?php else: ?>
                 <a href="?action=login" class="custom-nav-item">Login</a>
                 <a href="?action=create_account" class="custom-nav-item">Criar conta</a>

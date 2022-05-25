@@ -57,6 +57,26 @@ class User
     /**
      * @throws CustomException
      */
+    public function validateLogin(string $email, string $password): bool|object
+    {
+        $parameters = [
+            ':email' => $email
+        ];
+        $db = new Database();
+        $result = $db->select("SELECT id, email, full_name, password FROM user WHERE email = :email AND status = 'active' AND deleted_at IS NULL", $parameters);
+        if (count($result) != 1) {
+            return false;
+        }
+        $user = $result[0];
+        if (!password_verify($password, $user->password)) {
+            return false;
+        }
+        return $user;
+    }
+
+    /**
+     * @throws CustomException
+     */
     public function validatePurlEmail(string $purl): bool
     {
         $db = new Database();

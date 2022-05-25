@@ -106,7 +106,52 @@ class Main
      */
     public function login(): void
     {
+        if (Store::validateLoggedUser()) {
+            Store::redirect();
+            return;
+        }
         $this->showRoute('login');
+    }
+
+    /**
+     * @throws CustomException
+     */
+    public function loginSubmit(): void
+    {
+        if (Store::validateLoggedUser()) {
+            Store::redirect();
+            return;
+        }
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            Store::redirect();
+            return;
+        }
+        if (!isset($_POST['email']) || !isset($_POST['password']) || !filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['error'] = 'Login inválido';
+            Store::redirect('login');
+            return;
+        }
+        $email = trim(strtolower($_POST['email']));
+        $password = trim(strtolower($_POST['password']));
+        $user = new User();
+        $result = $user->validateLogin($email, $password);
+        if (is_bool($result)) {
+            $_SESSION['error'] = 'Login inválido';
+            Store::redirect('login');
+            return;
+        }
+        $_SESSION['user'] = $result->id;
+        $_SESSION['email'] = $result->email;
+        $_SESSION['name'] = $result->full_name;
+        Store::redirect();
+    }
+
+    public function logout(): void
+    {
+        unset($_SESSION['user']);
+        unset($_SESSION['email']);
+        unset($_SESSION['name']);
+        Store::redirect();
     }
 
     /**

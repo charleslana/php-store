@@ -1,6 +1,6 @@
 <?php
 
-$routes = ['index' => 'main@index', 'store' => 'main@store', 'cart' => 'main@cart', 'create_account' => 'main@createAccount', 'create_account_submit' => 'main@createAccountSubmit', 'confirm_email' => 'main@confirmEmail', 'login' => 'main@login'];
+$routes = ['index' => 'main@index', 'store' => 'main@store', 'cart' => 'main@cart', 'create_account' => 'main@createAccount', 'create_account_submit' => 'main@createAccountSubmit', 'confirm_email' => 'main@confirmEmail', 'login' => 'main@login', 'login_submit' => 'main@loginSubmit', 'logout' => 'main@logout'];
 
 $action = 'index';
 
