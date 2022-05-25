@@ -33,25 +33,6 @@ class Database
         }
     }
 
-    private function connect(): void
-    {
-        $this->binding = new PDO(
-            'mysql:' .
-            'host=' . MYSQL_SERVER . ';' .
-            'dbname=' . MYSQL_DATABASE . ';' .
-            'charset=' . MYSQL_CHARSET,
-            MYSQL_USER,
-            MYSQL_PASSWORD,
-            array(PDO::ATTR_PERSISTENT => true)
-        );
-        $this->binding->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-    }
-
-    private function disconnect(): void
-    {
-        $this->binding = null;
-    }
-
     /**
      * @throws CustomException
      */
@@ -144,5 +125,24 @@ class Database
             $this->disconnect();
             return false;
         }
+    }
+
+    private function connect(): void
+    {
+        $this->binding = new PDO(
+            'mysql:' .
+            'host=' . MYSQL_SERVER . ';' .
+            'dbname=' . MYSQL_DATABASE . ';' .
+            'charset=' . MYSQL_CHARSET,
+            MYSQL_USER,
+            MYSQL_PASSWORD,
+            array(PDO::ATTR_PERSISTENT => true)
+        );
+        $this->binding->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    }
+
+    private function disconnect(): void
+    {
+        $this->binding = null;
     }
 }

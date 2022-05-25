@@ -21,20 +21,6 @@ class Main
     /**
      * @throws CustomException
      */
-    private function showRoute(string $route, ?array $data = null): void
-    {
-        Store::showLayout([
-            'layout/header_html',
-            'layout/header',
-            $route,
-            'layout/footer',
-            'layout/footer_html'
-        ], $data);
-    }
-
-    /**
-     * @throws CustomException
-     */
     public function confirmEmail(): void
     {
         if (Store::validateLoggedUser()) {
@@ -53,18 +39,22 @@ class Main
         $user = new User();
         $result = $user->validatePurlEmail($purl);
         if ($result) {
-            echo 'Conta validada com sucesso';
+            $this->showRoute('account_confirmed');
             return;
         }
-        echo 'A conta não foi validada';
+        Store::redirect();
     }
 
     /**
      * @throws CustomException
      */
-    public function index(): void
+    public function createAccount(): void
     {
-        $this->showRoute('index');
+        if (Store::validateLoggedUser()) {
+            $this->index();
+            return;
+        }
+        $this->showRoute('create_account');
     }
 
     /**
@@ -97,22 +87,26 @@ class Main
         $email = new Email();
         $result = $email->sendEmailNewAccount($userEmail, $userName, $purl);
         if ($result) {
-            echo 'E-mail enviado';
-        } else {
-            echo 'Error';
+            $this->showRoute('create_account_success');
+            return;
         }
+        echo 'Ocorreu um erro';
     }
 
     /**
      * @throws CustomException
      */
-    public function createAccount(): void
+    public function index(): void
     {
-        if (Store::validateLoggedUser()) {
-            $this->index();
-            return;
-        }
-        $this->showRoute('create_account');
+        $this->showRoute('index');
+    }
+
+    /**
+     * @throws CustomException
+     */
+    public function login(): void
+    {
+        $this->showRoute('login');
     }
 
     /**
@@ -121,5 +115,19 @@ class Main
     public function store(): void
     {
         $this->showRoute('store');
+    }
+
+    /**
+     * @throws CustomException
+     */
+    private function showRoute(string $route, ?array $data = null): void
+    {
+        Store::showLayout([
+            'layout/header_html',
+            'layout/header',
+            $route,
+            'layout/footer',
+            'layout/footer_html'
+        ], $data);
     }
 }

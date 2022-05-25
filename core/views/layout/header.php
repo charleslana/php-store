@@ -15,7 +15,7 @@ use core\classes\Store;
                 <a href="?action=dashboard" class="custom-nav-item">Minha conta</a>
                 <a href="?action=logout" class="custom-nav-item">Sair</a>
             <?php else: ?>
-                <a href="?action=login" class="custom-nav-item">Entrar</a>
+                <a href="?action=login" class="custom-nav-item">Login</a>
                 <a href="?action=create_account" class="custom-nav-item">Criar conta</a>
             <?php endif; ?>
             <a href="?action=cart"><em class="fa-solid fa-cart-shopping"></em></a>
