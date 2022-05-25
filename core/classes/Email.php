@@ -26,11 +26,11 @@ class Email
             $mail->setFrom(EMAIL_FROM, APP_NAME);
             $mail->addAddress($email, $name);
             $mail->isHTML(true);
-            $mail->Subject = APP_NAME . ' - Email confirmation';
-            $html = '<p>Welcome to our store' . APP_NAME . '.</p>';
-            $html .= '<p>To enter our store, you need to confirm your email.</p>';
-            $html .= '<p>To confirm the email click on the link below:</p>';
-            $html .= "<p><a href='$purl'>Email confirmation</a></p>";
+            $mail->Subject = APP_NAME . ' - Confirmação de E-mail';
+            $html = '<p>Bem vindo a nossa loja ' . APP_NAME . '.</p>';
+            $html .= '<p>Para entrar na loja, você deve confirmar o e-mail.</p>';
+            $html .= '<p>Clique abaixo para confirmar sua conta:</p>';
+            $html .= "<p><a href='$purl'>Confirmar a conta</a></p>";
             $html .= '<p><i><small>' . APP_NAME . '</small></i></p>';
             $mail->Body = $html;
             $mail->send();

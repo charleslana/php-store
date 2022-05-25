@@ -13,7 +13,7 @@ class Store
     public static function showLayout(array|string $structures, array|string $data = null): void
     {
         if (!is_array($structures)) {
-            throw new CustomException('Invalid structure collection');
+            throw new CustomException('Coleção de estrutura inválida');
         }
         if (!empty($data) && is_array($data)) {
             extract($data);

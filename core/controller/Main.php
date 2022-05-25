@@ -53,10 +53,10 @@ class Main
         $user = new User();
         $result = $user->validatePurlEmail($purl);
         if ($result) {
-            echo 'Account successfully validated';
+            echo 'Conta validada com sucesso';
             return;
         }
-        echo 'The account has not been validated';
+        echo 'A conta não foi validada';
     }
 
     /**
@@ -81,7 +81,7 @@ class Main
             return;
         }
         if ($_POST['password'] !== $_POST['confirmationPassword']) {
-            $_SESSION['error'] = 'Passwords are not the same';
+            $_SESSION['error'] = 'As senhas não são iguais';
             $this->createAccount();
             return;
         }
@@ -89,7 +89,7 @@ class Main
         $userEmail = strtolower(trim($_POST['email']));
         $userName = trim($_POST['fullName']);
         if ($user->validateExistsEmail($_POST['email'])) {
-            $_SESSION['error'] = 'Email already exists';
+            $_SESSION['error'] = 'E-mail já existe';
             $this->createAccount();
             return;
         }
@@ -97,7 +97,7 @@ class Main
         $email = new Email();
         $result = $email->sendEmailNewAccount($userEmail, $userName, $purl);
         if ($result) {
-            echo 'E-mail sent';
+            echo 'E-mail enviado';
         } else {
             echo 'Error';
         }

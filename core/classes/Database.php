@@ -17,7 +17,7 @@ class Database
     public function delete(string $sql, ?array $parameters = null): bool
     {
         if (!preg_match('/^DELETE/i', $sql)) {
-            throw new CustomException('Database - It\'s not a delete statement');
+            throw new CustomException('Banco de dados - não é uma instrução de exclusão');
         }
         $this->connect();
         try {
@@ -59,7 +59,7 @@ class Database
     {
         $sql = trim($sql);
         if (!preg_match('/^INSERT/i', $sql)) {
-            throw new CustomException('Database - It\'s not a insert statement');
+            throw new CustomException('Banco de dados - não é uma instrução de inserção');
         }
         $this->connect();
         try {
@@ -82,7 +82,7 @@ class Database
     {
         $sql = trim($sql);
         if (!preg_match('/^SELECT/i', $sql)) {
-            throw new CustomException('Database - It\'s not a select statement');
+            throw new CustomException('Banco de dados - não é uma instrução de seleção');
         }
         $this->connect();
         try {
@@ -107,7 +107,7 @@ class Database
     {
         $sql = trim($sql);
         if (preg_match('/^(SELECT|INSERT|UPDATE|DELETE)/i', $sql)) {
-            throw new CustomException('Database - Invalid instruction');
+            throw new CustomException('Banco de dados - Instrução inválida');
         }
         $this->connect();
         try {
@@ -130,7 +130,7 @@ class Database
     {
         $sql = trim($sql);
         if (!preg_match('/^UPDATE/i', $sql)) {
-            throw new CustomException('Database - It\'s not a update statement');
+            throw new CustomException('Banco de dados - não é uma instrução de atualização');
         }
         $this->connect();
         try {
